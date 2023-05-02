@@ -1,1 +1,63 @@
 
+Approach:
+We need to add two numbers in an iterative way. First add the last node numbers then 
+second last numbers and so on. If carry is generated then pass it on to next node sum
+Sum is stored in a node creating linked list.
+This process goes on until both the linked list got finished.
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* prev = new ListNode(l1->val+l2->val);
+        ListNode* node1 = prev;
+        // l1 = l1->next;
+        // l2= l2->next;
+        int nextt = 0;
+        while(l1!=NULL || l2!=NULL||nextt)
+        {
+            ListNode* node = new ListNode();
+            int cnt=nextt;
+            if (l1!=NULL)
+            {
+                cnt+=l1->val;
+                l1 = l1->next;
+            }
+            if (l2!=NULL)
+            {
+                cnt+=l2->val;
+                l2 = l2->next;
+            }
+            if (cnt==0)
+            {
+                node->val = 0;
+            }
+            else 
+            {
+                int dig = log10(cnt)+1;
+                if (dig==1)
+                {
+                    node->val = cnt;
+                    nextt=0;
+                }
+                else 
+                {
+                    nextt = 1;
+                    node->val = (cnt-10);
+                }
+            }
+            prev->next = node;
+            prev = node;
+        }
+        return node1->next;
+    }
+};
