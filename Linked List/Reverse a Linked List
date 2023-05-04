@@ -1,12 +1,14 @@
 Approach 1 
 iterative way
-
+We will make two Listnode pointer, prev and node1. first prev will point to nullptr. node1 will be created with data of first node. node1 will be pointed to prev. prev will be pointed to node1. node1 will be created with data of next node. the above approach will run in loop until we reach the end of linked list.
 
 
 
 
 Approach 2 
 Recursive way
+It is little bit complex
+the Recursive function will return last node of the linked list pointing to null. In the Recursive function, we will point node 
 
 /**
  * Definition for singly-linked list.
