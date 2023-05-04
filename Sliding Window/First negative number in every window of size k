@@ -1,6 +1,6 @@
 
 Approach:
-
+We will use queue to keep track of negative elements in a window. we will push q.front() in vector ans. Whenever we will shift the window we can remove A[i] if it is negative. We can push A[j] to queue if it is negative. this process goes on until we reach end of the array.
 
 #define ll long long int
 vector<long long> printFirstNegativeInteger(long long int A[],
