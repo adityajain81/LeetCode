@@ -1,4 +1,6 @@
 Approach:
+We will use map to keep track of no. of unique elements. if it is less than k, we will keep incrementing j. if it is equal to k, we will store it in ans variable. if it is greater than k, then start removing s[i] and keep incrementing i. this process goes on till map size comes down to k. 
+At the end ans will give the answer. 
 
 
 
