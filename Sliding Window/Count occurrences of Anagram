@@ -1,9 +1,11 @@
 
 Approach:
-
+create a Map of char of the pat. cnt=map.size(). Now we will start traversing txt. When we will get char that is in map, we will reduce the map[char] by 1. If map[char]==0, then cnt--. This process goes on till we get the window size. If cnt==0, then ans++. We will slide the window by i++, j++ doing further calculations.
 
 Great Concept:
+Here few things to notice is first find out the char if it is present in map or not. Thus should be done using map.find() not map[char]  as this will push the element to map with value 0 if it is not there. Next time it will be there and we process that char.
 
+Best way is to use map.find(char). If it is there then we will process that element otherwise not.
 
 
 
