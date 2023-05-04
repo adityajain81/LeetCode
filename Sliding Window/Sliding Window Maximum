@@ -1,5 +1,11 @@
 Approach:
 Monotonic Queue
+Queue data structure with either increasing elements or decreasing elements.
+Increasing Monotonic Queue 
+Decreasing Monotonic Queue 
+
+In each sliding window, we will push elements in decreasing monotonic Queue. For each sliding window we will push Q.front() to the answer vector. Window get slided by i++ and j++.
+
 
 
 
