@@ -1,0 +1,15 @@
+Approach:
+
+
+class Solution {
+public:
+    using VI = vector<int>;
+    int maxProduct(VI& A) {
+        auto [lo, hi, best] = make_tuple(A[0], A[0], A[0]);
+        for (auto x: VI{ A.begin() + 1, A.end() }) {
+            tie(lo, hi) = minmax({ lo * x, hi * x, x });
+            best = max(best, hi);
+        }
+        return best;
+    }
+};
