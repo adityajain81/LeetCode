@@ -1,0 +1,21 @@
+Approach:
+
+
+#define ll long long
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int mx=0;
+        ll n = prices.size();
+        ll j=0;
+        ll i=0;
+        int cheap=prices[0];
+        while(j<n)
+        {
+            cheap = std::min(cheap,prices[j]);
+            mx = std::max(mx,(prices[j]-cheap));
+            j++;
+        }
+        return mx;
+    }
+};
