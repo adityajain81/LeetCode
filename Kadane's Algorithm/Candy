@@ -1,0 +1,35 @@
+Approach:
+
+
+class Solution {
+private:
+    void candy1(vector<int> ratings, int arr[], int n)
+    {
+        for(int i=0;i<n-1;i++)
+        {
+            if(ratings[i]<ratings[i+1])
+            {
+                arr[i+1] = arr[i]+1;
+            }
+        }
+    }
+public:
+    int candy(vector<int>& ratings) {
+        int n = ratings.size();
+        // vector<pair<int,int>> v;
+        int arr[n];
+        fill(arr,arr+n,1);
+        candy1(ratings,arr,n);
+        reverse(ratings.begin(),ratings.end());
+        int arr1[n];
+        fill(arr1,arr1+n,1);
+        candy1(ratings,arr1,n);
+        int ans=0;
+        for(int i=0;i<n;i++)
+        {
+            ans+=max(arr[i],arr1[n-i-1]);
+        }
+        return ans;
+        
+    }
+};
