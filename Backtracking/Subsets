@@ -1,0 +1,29 @@
+Approach:
+
+
+Solution:
+vector<vector<int>> v;
+class Solution {
+private:
+    void all(vector<int> nums,int n,vector<int>& ans)
+    {
+        if(n==0)
+        {
+            v.push_back(ans);
+            return;
+        }
+        all(nums,n-1,ans);
+        ans.push_back(nums[n-1]);
+        all(nums,n-1,ans);
+        ans.pop_back();
+    }
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        v.clear();
+        int n = nums.size();
+        vector<int> ans;
+        all(nums,n,ans);
+        return v;
+        
+    }
+};
