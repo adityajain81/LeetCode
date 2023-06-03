@@ -1,0 +1,33 @@
+Approach:
+
+
+
+
+Code:
+string ans;
+void solve1(string A, int B,int n)
+{
+    if(A>ans)
+    {
+        ans=A;
+    }
+    if (B==0)
+    {
+        return;
+    }
+    for(int i=0;i<n;i++)
+    {
+        for(int j=i+1;j<n;j++)
+        {
+            swap(A[i],A[j]);
+            solve1(A,B-1,n);
+            swap(A[i],A[j]);
+        }
+    }
+}
+string Solution::solve(string A, int B) {
+    ans=A;
+    int n=A.size();
+    solve1(A,B,n);
+    return ans;
+}
