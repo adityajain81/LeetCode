@@ -1,0 +1,25 @@
+Approach:
+
+
+code:
+void generate(vector<vector<int> > &result, vector<int> &temp, int sum, int left, int B, vector<int> &A) {
+    if(sum > B) return;
+    if(sum == B) {
+        result.push_back(temp);
+        return;
+    }
+    for(int i=left; i<A.size();i++) {
+        temp.push_back(A[i]);
+        generate(result, temp, sum+A[i], i, B, A);
+        temp.pop_back();
+    }
+}
+vector<vector<int> > Solution::combinationSum(vector<int> &A, int B) {
+    sort(A.begin(), A.end());
+    vector<int>::iterator itr = unique(A.begin(), A.end());
+    A.resize(distance(A.begin(), itr));
+    vector<vector<int> > result;
+    vector<int> temp;
+    generate(result, temp, 0, 0, B, A);
+    return result;
+}
