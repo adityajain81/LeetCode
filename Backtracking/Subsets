@@ -2,28 +2,34 @@ Approach:
 
 
 Solution:
-vector<vector<int>> v;
-class Solution {
-private:
-    void all(vector<int> nums,int n,vector<int>& ans)
+vector<vector<int>>ans;
+void solve(vector<int> A, int i,vector<int>& sol,int n)
+{
+    if(i==n)
     {
-        if(n==0)
-        {
-            v.push_back(ans);
-            return;
-        }
-        all(nums,n-1,ans);
-        ans.push_back(nums[n-1]);
-        all(nums,n-1,ans);
-        ans.pop_back();
+        ans.push_back(sol);
+        return;
     }
-public:
-    vector<vector<int>> subsets(vector<int>& nums) {
-        v.clear();
-        int n = nums.size();
-        vector<int> ans;
-        all(nums,n,ans);
-        return v;
-        
+    
+        solve(A,i+1,sol,n);
+        sol.push_back(A[i]);
+        solve(A,i+1,sol,n);
+        sol.pop_back();
+    
+}
+bool lexicographicalCompare(const std::vector<int>& a, const std::vector<int>& b) {
+    return std::lexicographical_compare(a.begin(), a.end(), b.begin(), b.end());
+}
+vector<vector<int> > Solution::subsets(vector<int> &A) {
+    ans.clear();
+    int n = A.size();
+    vector<int> sol;
+    // sort(A.rbegin(),A.rend)
+    solve(A,0,sol,n);
+    for(int i=0;i<ans.size();i++)
+    {
+        sort(ans[i].begin(),ans[i].end());
     }
-};
+    sort(ans.begin(),ans.end(),lexicographicalCompare);
+    return ans;
+}
