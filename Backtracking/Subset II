@@ -1,0 +1,39 @@
+Approach:
+
+
+
+Code:
+
+vector<vector<int>>ans;
+void solve(vector<int> A, int i,vector<int>& sol,int n)
+{
+    if(i==n)
+    {
+        ans.push_back(sol);
+        return;
+    }
+    
+        solve(A,i+1,sol,n);
+        sol.push_back(A[i]);
+        solve(A,i+1,sol,n);
+        sol.pop_back();
+    
+}
+bool lexicographicalCompare(const std::vector<int>& a, const std::vector<int>& b) {
+    return std::lexicographical_compare(a.begin(), a.end(), b.begin(), b.end());
+}
+vector<vector<int> > Solution::subsetsWithDup(vector<int> &A) {
+    ans.clear();
+    int n = A.size();
+    vector<int> sol;
+    // sort(A.rbegin(),A.rend());
+    solve(A,0,sol,n);
+    int n1 = ans.size();
+    for(int i=0;i<n1;i++)
+    {
+        sort(ans[i].begin(),ans[i].end());
+    }
+    sort(ans.begin(),ans.end(),lexicographicalCompare);
+    ans.erase(std::unique(ans.begin(), ans.end()), ans.end());
+    return ans;
+}
