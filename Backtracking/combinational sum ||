@@ -1,0 +1,42 @@
+Approach:
+
+
+
+Code:
+
+vector<vector<int>>ans;
+void solve(vector<int> A, int B,int n,vector<int>&sol)
+{
+    if(B==0)
+    {
+        ans.push_back(sol);
+        return;
+    }
+    if (n==0||B<0)
+    {
+        return;
+    }
+    solve(A,B,n-1,sol);
+    sol.push_back(A[n-1]);
+    solve(A,B-A[n-1],n-1,sol);
+    sol.pop_back();
+}
+
+
+vector<vector<int> > Solution::combinationSum(vector<int> &A, int B) {
+    // Do not write main() function.
+    // Do not read input, instead use the arguments to the function.
+    // Do not print the output, instead return values as specified
+    // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
+    int n = A.size();
+    vector<int>sol;
+    ans.clear();
+    solve(A,B,n,sol);
+    for(int i=0;i<ans.size();i++)
+    {
+        sort(ans[i].begin(),ans[i].end());
+    }
+    sort(ans.begin(),ans.end());
+    ans.erase(std::unique(ans.begin(), ans.end()), ans.end());
+    return ans;
+}
