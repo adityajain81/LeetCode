@@ -1,0 +1,53 @@
+Approach:
+
+
+
+Code:
+class Solution{
+private:
+    bool solve(int n, int arr[],int sum1,vector<vector<int>>&v)
+    {
+        if (sum1==0)
+        {
+            return true;
+        }
+        if(n==0)
+        {
+            return false;
+        }
+        if (v[sum1][n]!=-1)
+        {
+            return v[sum1][n];
+        }
+        if(arr[n-1]<=sum1)
+        {
+            return v[sum1][n]=(solve(n-1,arr,sum1-arr[n-1],v)||solve(n-1,arr,sum1,v));
+        }
+        else 
+        {
+            return v[sum1][n]=solve(n-1,arr,sum1,v);
+        }
+    }
+public:
+    int equalPartition(int N, int arr[])
+    {
+        // code here
+        
+        int sum1=0;
+        for(int i=0;i<N;i++)
+        {
+            sum1+=arr[i];
+        }
+
+        if (sum1%2==1)
+        {
+            return false;
+        }
+        else 
+        {
+            vector<vector<int>> v(sum1+1,vector<int>(N+1,-1));
+            return solve(N,arr,sum1/2,v);
+        }
+        
+    }
+};
