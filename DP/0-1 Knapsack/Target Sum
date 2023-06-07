@@ -1,0 +1,38 @@
+Approach:
+
+
+
+Code:
+int t[22][2002];
+class Solution {
+public:
+    int findTargetSumWays(vector<int>& nums, int target) {
+        int n = nums.size();
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<2000;j++)
+            {
+                if (i==0)
+                {
+                    if(j==target+1000)
+                    {
+                        t[i][j]=1;
+                    }
+                    else 
+                    {
+                        t[i][j]=0;
+                    }
+                }
+            }
+        }
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<1000+target;j++)
+            {
+                t[i][j] = t[i-1][j] + t[i][j-1];
+            }
+        }
+        return t[n][1000+target];
+        
+    }
+};
