@@ -1,0 +1,73 @@
+Approach:
+
+
+
+Code:
+class Solution{
+private:
+    bool solve(vector<int>arr, int sum, int n,vector<vector<int>>&v)
+    {
+        if (sum==0)
+        {
+            return true;
+        }
+        if (n==0)
+        {
+            return false;
+        }
+        if (v[sum][n]!=-1)
+        {
+            return v[sum][n];
+        }
+        if (arr[n-1]<=sum)
+        {
+            return v[sum][n]=(solve(arr,sum-arr[n-1],n-1,v)||solve(arr,sum,n-1,v));
+        }
+        else 
+        {
+            return v[sum][n]=solve(arr,sum,n-1,v);
+        }
+        
+    }
+    bool solve1(vector<int>arr, int sum, int n)
+    {
+        vector<vector<int>> v(sum+1,vector<int>(n+1,0));
+        
+            for(int i=0;i<=sum;i++)
+            {
+                for(int j=0;j<=n;j++)
+                {
+                    if(j==0)
+                    {
+                        v[i][j]=0;
+                    }
+                    if(i==0)
+                    {
+                        v[i][j]=1;
+                    }
+                }
+            }
+            for(int i=1;i<=sum;i++)
+            {
+                for(int j=1;j<=n;j++)
+                {
+                    if (arr[j-1]<=i)
+                    {
+                        v[i][j] = max(v[i-arr[j-1]][j-1],v[i][j-1]);
+                    }
+                    else 
+                    {
+                        v[i][j] = v[i][j-1];
+                    }
+                }
+            }
+        return v[sum][n];
+    }
+public:
+    bool isSubsetSum(vector<int>arr, int sum){
+        // code here 
+        int n = arr.size();
+        // vector<vector<int>> v(sum+1,vector<int>(n+1,-1));
+        return solve1(arr,sum,n);
+    }
+};
