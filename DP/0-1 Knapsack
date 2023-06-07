@@ -3,3 +3,53 @@ Approach:
 
 
 Code:
+class Solution
+{
+    private:
+    int solve(int W, int wt[], int val[], int n,vector<vector<int>>&v)
+    {
+        if(n==0)
+        {
+            return 0;
+        }
+        if (v[W][n-1]!=-1)
+        {
+            return v[W][n-1];
+        }
+        if(wt[n-1]<=W)
+        {
+            return v[W][n-1]=max(val[n-1]+solve(W-wt[n-1],wt,val,n-1,v),solve(W,wt,val,n-1,v));
+        }
+        else 
+        {
+            return v[W][n-1]=solve(W,wt,val,n-1,v);
+        }
+    }
+    int solve1(int W, int wt[], int val[], int n)
+    {
+        vector<vector<int>> v(W+1,vector<int>(n+1,0));
+        for(int i=1;i<=W;i++)
+        {
+            for(int j=1;j<=n;j++)
+            {
+                if(wt[j-1]<=i)
+                {
+                    v[i][j] = max(val[j-1]+v[i-wt[j-1]][j-1],v[i][j-1]);
+                }
+                else 
+                {
+                    v[i][j] = v[i][j-1];
+                }
+            }
+        }
+        return v[W][n];
+    }
+    public:
+    //Function to return max value that can be put in knapsack of capacity W.
+    int knapSack(int W, int wt[], int val[], int n) 
+    { 
+       // Your code here
+       vector<vector<int>> v(W+1,vector<int>(n,-1));
+       return solve1(W,wt,val,n);
+    }
+};
