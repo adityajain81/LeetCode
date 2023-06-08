@@ -1,0 +1,36 @@
+Approach:
+
+
+Code:
+class Solution {
+private:
+    bool solve(int n, vector<int>& quantities,int m, int dis)
+    {
+        int cnt=0;
+        for(int i=0;i<m;i++)
+        {
+            cnt+=((quantities[i]+dis-1)/dis);
+        }
+        return cnt<=n;
+        
+    }
+public:
+    int minimizedMaximum(int n, vector<int>& quantities) {
+        int m=quantities.size();
+        int lo=1;
+        int hi=1e5;
+        while(lo<hi)
+        {
+            int mid = lo + (hi-lo)/2;
+            if(solve(n,quantities,m,mid))
+            {
+                hi=mid;
+            }
+            else
+            {
+                lo=mid+1;
+            }
+        }
+        return hi;
+    }
+};
