@@ -1,0 +1,53 @@
+Approach:
+
+
+
+Code:
+class Solution {
+private:
+    bool placecow(int n, int k, vector<int> &stalls, int dis)
+    {
+        int prev = stalls[0];
+        k--;
+        while(k--)
+        {
+            if(lower_bound(stalls.begin(),stalls.end(),prev+dis)-stalls.begin()!=n)
+            {
+                prev = stalls[lower_bound(stalls.begin(),stalls.end(),prev+dis)-stalls.begin()];
+                
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+public:
+
+    int solve(int n, int k, vector<int> &stalls) {
+    
+        // Write your code here
+        sort(stalls.begin(),stalls.end());
+        int lo = 1;
+        // int n = stalls.size();
+        int hi = stalls[n-1]-stalls[0];
+        while(lo<=hi)
+        {
+            int mid = lo + (hi-lo)/2;
+            if(placecow(n,k,stalls,mid))
+            {
+                lo = mid+1;
+            }
+            else 
+            {
+                hi = mid-1;
+            }
+        }
+        
+        
+        return lo-1;
+        // return placecow(n,k+1,stalls,2);
+        
+    }
+};
