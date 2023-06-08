@@ -1,0 +1,63 @@
+Approach:
+
+
+
+Code:
+class Solution {
+private:
+    bool solve(vector<int>& weights, int days,int cp,int n)
+    {
+        int d=0;
+        int cp1=0;
+        for(int i=0;i<n;i++)
+        {
+            cp1+=weights[i];
+            if (weights[i]>cp)
+            {
+                return false;
+            }
+            if(cp1==cp) 
+            {
+                d++;
+                cp1=0;
+            }
+            else if(cp1>cp)
+            {
+                d++;
+                cp1 = weights[i];
+                if(weights[i]==cp)
+                {
+                    d++;
+                }
+                if(d>days)
+                {
+                    return false;
+                }
+            }
+        }
+        if (cp1>0)
+        {
+            d++;
+        }
+        return d<=days;
+    }
+public:
+    int shipWithinDays(vector<int>& weights, int days) {
+        int lo=1;
+        int hi = INT_MAX-1;
+        int n = weights.size();
+        while(lo<hi)
+        {
+            int mid = lo + (hi-lo)/2;
+            if(solve(weights,days,mid,n))
+            {
+                hi = mid;
+            }
+            else 
+            {
+                lo = mid+1;
+            }
+        }
+        return hi;
+    }
+};
