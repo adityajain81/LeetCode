@@ -1,0 +1,83 @@
+Approach:
+
+
+Code:
+class Solution {
+private:
+    bool solve(vector<int>& bloomDay, int m, int k, int d1, int n)
+    {
+        // vector<int> ans;
+        int ans1=0;
+        int k1 = k;
+        for(int i=0;i<n;i++)
+        {
+            if(bloomDay[i]<=d1)
+            {
+                k1--;
+                
+                if(k1==0)
+                {
+                    m--;
+                    k1 = k;
+                }
+            }
+            else
+            {
+                // ans.push_back(0);
+                k1=k;
+                
+                
+            }
+            // ans1+=ans[i];
+            
+        }
+        if(m<=0)
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+        
+    }
+public:
+    int minDays(vector<int>& bloomDay, int m, int k) {
+        int n = bloomDay.size();
+        // long long a = m*k;
+        // if(a>n)
+        // {
+        //     return -1;
+        // }
+        int lo = 1;
+        
+        int hi = 1;
+        for(int i=0;i<n;i++)
+        {
+            hi = max(hi,bloomDay[i]);
+        }
+        while(lo<hi)
+        {
+            int mid = lo + (hi-lo)/2;
+            // cout<<lo<<" "<<mid<<" "<<hi<<endl;
+            if(solve(bloomDay,m,k,mid,n))
+            {
+                hi = mid;
+            }
+            else 
+            {
+                lo=mid+1;
+            }
+        }
+        if(solve(bloomDay,m,k,hi,n))
+        {
+            return hi;
+        }
+        else
+        {
+            return -1;
+        }
+        // return hi;
+        // return solve(bloomDay,m,k,5484,n);
+    }
+};
