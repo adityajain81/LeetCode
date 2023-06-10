@@ -1,0 +1,40 @@
+Approach:
+
+
+
+Code:
+class Solution {
+private:
+    int solve(vector<int> nums, int n, int lo, int hi,int mn)
+    {
+        if (lo>hi)
+        {
+            return mn;
+        }
+        int mid = lo + (hi-lo)/2;
+        if(nums[mid]<mn)
+        {
+            mn = nums[mid];
+        }
+        if(nums[mid]<nums[lo])
+        {
+            mn = nums[mid];
+            return solve(nums,n,lo,mid-1,mn);
+        }
+        else
+        {
+            if(nums[lo]<mn) mn = nums[lo];
+            return solve(nums,n,mid+1,hi,mn);
+        }
+    }
+public:
+    int findMin(vector<int>& nums) {
+        int n = nums.size();
+        int lo=0;
+        int hi = n-1;
+        int mid=lo + (hi-lo)/2;
+        int mn = INT_MAX;
+        return solve(nums,n,lo,hi,mn);
+            
+    }
+};
