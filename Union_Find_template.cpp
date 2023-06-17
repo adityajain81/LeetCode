@@ -29,5 +29,20 @@ class disjoinset{
       rank[paru]++;
     }
   }
+    void unionbysize(int u,int v){
+      int paru = findupar(u);
+    int parv = findupar(v);
+    if(paru==parv)
+      return;
+    if(size[paru]<size[parv]){
+      parent[paru] = parv;
+      size[parv]+=size[paru];
+    }
+      else
+    {
+      parent[parv] = paru;
+      size[paru]+=size[parv];
+    }
+    }
  };
           
